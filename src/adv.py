@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from textwrap import wrap
 
 room = {
     'outside':
@@ -34,17 +35,45 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
 # Make a new player object that is currently in the 'outside' room.
-player = Player('Hero Steve', room['outside'].name)
-print("player", player)
+player = Player('Hero Steve', room['outside'])
+linebreak = "\n"
 # Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
+while True:
+    # * Prints the current room name
+    # * Prints the current description
+    # (the textwrap module might be useful here).
+    print(f"Current room: {player.current_room.name} {linebreak}"
+          f"You see: {wrap(player.current_room.description, 50)[0]}"
+          )
 # * Waits for user input and decides what to do.
-#
+    choice = input("What direction do you want to move in? n/s/e/w: ")
 # If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+    try:
+        if choice == 'n':
+            # move north
+            print("PLAYA Be", player.current_room.name)
+            player.current_room = player.current_room.n_to
+            print("PLAYA Af", player.current_room.name)
+        elif choice == 's':
+            # move south
+            print("PLAYA Be", player.current_room.name)
+            player.current_room = player.current_room.s_to
+            print("PLAYA Af", player.current_room.name)
+        elif choice == 'e':
+            # move east
+            print("PLAYA Be", player.current_room.name)
+            player.current_room = player.current_room.e_to
+            print("PLAYA Af", player.current_room.name)
+        elif choice == 'w':
+            # move west
+            print("PLAYA Be", player.current_room.name)
+            player.current_room = player.current_room.w_to
+            print("PLAYA Af", player.current_room.name)
+        elif choice == 'q':
+            # If the user enters "q", quit the game.
+            print("exiting the program...")
+            break
+    except:
+        # Print an error message if the movement isn't allowed.
+        print("You see a big brick wall, go the other way.")
