@@ -14,3 +14,10 @@ class Player(Item):
 
     def inventory(self):
         return (f"Loot: {', '.join([item for item in self.items])}.")
+
+    def take_item(self, item):
+        if 'nothing' in self.inventory() or 'empty...' in self.inventory():
+            self.items = [item]
+        else:
+            self.items.append(item)
+        return (f"Picked up: {item}.")
