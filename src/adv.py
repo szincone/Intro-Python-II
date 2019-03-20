@@ -4,21 +4,25 @@ from textwrap import wrap
 
 room = {
     'outside':
-        Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
+        Room("Outside Cave Entrance", "North of you, the cave mount beckons", [
+             "red trinket", "orange cape", "mc hammer pants"]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", ["coin", "small dog"]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",
+                     ["apple", "chapstick"]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",
+                     ["buster sword", "materia"]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",
+                     ["broken glasses", "credit card"]),
 }
 
 # Link rooms together
@@ -43,8 +47,10 @@ while True:
     # * Prints the current room name
     # * Prints the current description
     # (the textwrap module might be useful here).
-    print(f"Current room: {player.current_room.name} {linebreak}"
-          f"You see: {wrap(player.current_room.description, 50)[0]}"
+    # works below
+    print(f"Room: {wrap(player.current_room.name, 30)[0]}{linebreak}"
+          f"Description: {wrap(player.current_room.description)[0]}{linebreak}"
+          f"{player.current_room.list_items()}"
           )
 # * Waits for user input and decides what to do.
     choice = input("What direction do you want to move in? n/s/e/w: ")

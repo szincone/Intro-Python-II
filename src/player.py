@@ -8,4 +8,4 @@ class Player():
         self.current_room = current_room
 
     def __str__(self):
-        return (f"{self.player_name} is currently in {self.current_room}")
+        return (f"{self.player_name} is currently in {self.current_room.name}")
