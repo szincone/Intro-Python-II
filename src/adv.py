@@ -48,38 +48,35 @@ while True:
     # * Prints the current description
     # (the textwrap module might be useful here).
     # works below
-    print(f"Room: {wrap(player.current_room.name, 30)[0]}{linebreak}"
-          f"Description: {wrap(player.current_room.description)[0]}{linebreak}"
-          f"{player.current_room.list_items()}"
-          )
+    print(
+        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+        f"{' ' * 10}Room: {wrap(player.current_room.name, 30)[0]}"
+        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+        f"{player.current_room.description}{linebreak}"
+        f"{linebreak}{wrap(player.current_room.list_items())[0]}"
+        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+    )
 # * Waits for user input and decides what to do.
     choice = input("What direction do you want to move in? n/s/e/w: ")
 # If the user enters a cardinal direction, attempt to move to the room there.
     try:
         if choice == 'n':
             # move north
-            print("PLAYA Be", player.current_room.name)
+            # print('player', player.current_room.name)
             player.current_room = player.current_room.n_to
-            print("PLAYA Af", player.current_room.name)
         elif choice == 's':
             # move south
-            print("PLAYA Be", player.current_room.name)
             player.current_room = player.current_room.s_to
-            print("PLAYA Af", player.current_room.name)
         elif choice == 'e':
             # move east
-            print("PLAYA Be", player.current_room.name)
             player.current_room = player.current_room.e_to
-            print("PLAYA Af", player.current_room.name)
         elif choice == 'w':
             # move west
-            print("PLAYA Be", player.current_room.name)
             player.current_room = player.current_room.w_to
-            print("PLAYA Af", player.current_room.name)
         elif choice == 'q':
             # If the user enters "q", quit the game.
             print("exiting the program...")
             break
     except:
         # Print an error message if the movement isn't allowed.
-        print("You see a big brick wall, go the other way.")
+        print(f"{linebreak}YOU SHALL NOT PASS.")
