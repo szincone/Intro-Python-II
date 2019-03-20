@@ -53,26 +53,28 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Hero Steve', room['outside'])
 linebreak = '\n'
+print_desc_bool = False
 # Write a loop that:
 while True:
     # * Prints the current room name
     # * Prints the current description
     # (the textwrap module might be useful here).
     # works below
-    print(
-        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
-        f"{' ' * 10}Room: {wrap(player.current_room.name, 30)[0]}"
-        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
-        f"{player.current_room.description}{linebreak}"
-        f"{linebreak}{wrap(player.current_room.list_items())[0]}"
-        f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
-    )
-# * Waits for user input and decides what to do.
-    action = input("What direction do you want to move in? n/s/e/w: ")
+    if print_desc_bool is False:
+        print(
+            f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+            f"{' ' * 10}Current Room: {wrap(player.current_room.name, 30)[0]}"
+            f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+            f"{player.current_room.description}{linebreak}"
+            f"{linebreak}{wrap(player.current_room.list_items())[0]}"
+            f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+        )
+        action = input("What direction do you want to move in? n/s/e/w: ")
+    # * Waits for user input and decides what to do.
     [action, action_mod] = [action.split(' ')[0], action.split(
         ' ')[1]] if ' ' in action else [action, 'nothing']
-    os.system('clr||clear')
-# If the user enters a cardinal direction, attempt to move to the room there.
+    print_desc_bool = False
+    # If the user enters a cardinal direction, attempt to move to the room there.
     try:
         if action == 'n':
             # move north
@@ -95,13 +97,17 @@ while True:
             # If the user enters "q", quit the game.
             print("exiting the program...")
             break
+        os.system('clr||clear')
     except:
         # Print an error message if the movement isn't allowed.
+        os.system('clr||clear')
         print(
             f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
-            f"  Your path is blocked, go another direction."
+            f"  Your path is blocked, go another direction.{linebreak}"
+            f"{' ' * 10}Current Room: {wrap(player.current_room.name, 30)[0]}"
             f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
         )
         action = input("What direction do you want to move in? n/s/e/w: ")
+        print_desc_bool = True
         os.system('clr||clear')
         continue
