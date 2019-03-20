@@ -1,6 +1,7 @@
+import os
+from textwrap import wrap
 from room import Room
 from player import Player
-from textwrap import wrap
 
 room = {
     'outside':
@@ -41,7 +42,7 @@ room['treasure'].s_to = room['narrow']
 #
 # Make a new player object that is currently in the 'outside' room.
 player = Player('Hero Steve', room['outside'])
-linebreak = "\n"
+linebreak = '\n'
 # Write a loop that:
 while True:
     # * Prints the current room name
@@ -58,6 +59,7 @@ while True:
     )
 # * Waits for user input and decides what to do.
     choice = input("What direction do you want to move in? n/s/e/w: ")
+    os.system('clr||clear')
 # If the user enters a cardinal direction, attempt to move to the room there.
     try:
         if choice == 'n':
@@ -79,4 +81,11 @@ while True:
             break
     except:
         # Print an error message if the movement isn't allowed.
-        print(f"{linebreak}YOU SHALL NOT PASS.")
+        print(
+            f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+            f"  Your path is blocked, go another direction."
+            f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
+        )
+        choice = input("What direction do you want to move in? n/s/e/w: ")
+        os.system('clr||clear')
+        continue
