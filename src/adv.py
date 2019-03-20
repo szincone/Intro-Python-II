@@ -58,24 +58,28 @@ while True:
         f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
     )
 # * Waits for user input and decides what to do.
-    choice = input("What direction do you want to move in? n/s/e/w: ")
+    action = input("What direction do you want to move in? n/s/e/w: ")
+    [action, action_mod] = [action.split(' ')[0], action.split(' ')[1]] if ' ' in action else [
+        action, 'nothing']
     os.system('clr||clear')
 # If the user enters a cardinal direction, attempt to move to the room there.
     try:
-        if choice == 'n':
+        if action == 'n':
             # move north
             # print('player', player.current_room.name)
             player.current_room = player.current_room.n_to
-        elif choice == 's':
+        elif action == 's':
             # move south
             player.current_room = player.current_room.s_to
-        elif choice == 'e':
+        elif action == 'e':
             # move east
             player.current_room = player.current_room.e_to
-        elif choice == 'w':
+        elif action == 'w':
             # move west
             player.current_room = player.current_room.w_to
-        elif choice == 'q':
+        elif action == 'take':
+            print(f"TAKING {action} {action_mod}")
+        elif action == 'q':
             # If the user enters "q", quit the game.
             print("exiting the program...")
             break
@@ -86,6 +90,6 @@ while True:
             f"  Your path is blocked, go another direction."
             f"{linebreak}{wrap('=' * 50)[0]}{linebreak}"
         )
-        choice = input("What direction do you want to move in? n/s/e/w: ")
+        action = input("What direction do you want to move in? n/s/e/w: ")
         os.system('clr||clear')
         continue
