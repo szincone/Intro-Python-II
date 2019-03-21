@@ -5,35 +5,41 @@ from player import Player
 
 room = {
     'outside':
-        Room("Outside Cave Entrance", "North of you, the cave mount beckons",
-             ["trinket", "cape", "pants"]
-             ),
+        Room(
+            "Outside Cave Entrance", "North of you, the cave mount beckons",
+            ["trinket", "cape", "pants"]
+        ),
 
     'foyer':
-        Room("Foyer",
-             """Dim light filters in from the south. Dusty passages run north and east.""",
-             ["coin", "dog"]
-             ),
+        Room(
+            "Foyer",
+            """Dim light filters in from the south. Dusty passages run north
+and east.""",
+            ["coin", "dog"]
+        ),
 
     'overlook':
-        Room("Grand Overlook", """A steep cliff appears before you, falling
-            into the darkness. Ahead to the north, a light flickers in
-            the distance, but there is no way across the chasm.""",
-             ["apple", "chapstick"]
-             ),
+        Room(
+            "Grand Overlook", """A steep cliff appears before you, falling
+into the darkness. Ahead to the north, a light flickers in
+the distance, but there is no way across the chasm.""",
+            ["apple", "chapstick"]
+        ),
 
     'narrow':
-        Room("Narrow Passage", """The narrow passage bends here from west
-            to north. The smell of gold permeates the air.""",
-             ["sword", "materia"]
-             ),
+        Room(
+            "Narrow Passage", """The narrow passage bends here from west
+to north. The smell of gold permeates the air.""",
+            ["sword", "materia"]
+        ),
 
     'treasure':
-        Room("Treasure Chamber", """You've found the long-lost treasure
-            chamber! Sadly, it has already been completely emptied by
-            earlier adventurers. The only exit is to the south.""",
-             ["glasses", "card"]
-             ),
+        Room(
+            "Treasure Chamber", """You've found the long-lost treasure chamber! Sadly,
+it has already been completely emptied by earlier adventurers.
+The only exit is to the south.""",
+            ["glasses", "card"]
+        ),
 }
 
 # Link rooms together
@@ -64,12 +70,11 @@ while True:
 
         print(
             f"{lb}{wrap('=' * 50)[0]}{lb}"
-            f"{' ' * 10}Current Room: {wrap(player.current_room.name, 30)[0]}"
-            f"{lb}{' ' * 10}Exits: {player.current_room.get_directions(player.current_room)}"
+            f"Current Room: {wrap(player.current_room.name, 30)[0]}"
             f"{lb}{wrap('=' * 50)[0]}{lb}"
-            # f"{[x for x in wrap(player.current_room.description)][0]}"
-            f"{player.current_room.description}"
-            f"{lb}{wrap(player.current_room.list_items())[0]}"
+            f"{lb}{player.current_room.description}{lb}"
+            f"{lb}{wrap(player.current_room.list_items())[0]}{lb}"
+            f"{lb}Current Exits: {player.current_room.get_directions(player.current_room)}{lb}"
             f"{lb}{wrap('=' * 50)[0]}{lb}"
         )
         action = input("What direction do you want to move in? n/s/e/w: ")
@@ -110,9 +115,10 @@ while True:
         os.system('clr||clear')
         print(
             f"{lb}{wrap('=' * 50)[0]}{lb}"
-            f"  Your path is blocked, go another direction.{lb}"
-            f"{' ' * 10}Current Room: {wrap(player.current_room.name, 30)[0]}"
+            f"Your path is blocked, go another direction.{lb}"
+            f"{lb}Current Room: {wrap(player.current_room.name, 30)[0]}"
             f"{lb}{wrap('=' * 50)[0]}{lb}"
+            f"{lb}Current Exits: {player.current_room.get_directions(player.current_room)}{lb}"
         )
         action = input("What direction do you want to move in? n/s/e/w: ")
         print_desc_bool = True
