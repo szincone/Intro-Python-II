@@ -13,7 +13,7 @@ class Player(Item):
         return (f"{self.player_name} is currently in {self.current_room.name}")
 
     def inventory(self):
-        return (f"Loot: {', '.join([item for item in self.items])}.")
+        return (f"Inventory: {', '.join([item for item in self.items])}.")
 
     def take_item(self, item):
         if 'nothing' in self.inventory() or 'empty...' in self.inventory():
